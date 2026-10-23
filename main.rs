@@ -1,15 +1,18 @@
 use std::io;
 
 fn main() {
-    // Already done for you: read one line of input into `name` and drop the
-    // Enter key from its end. A later lesson explains how this works.
     let mut line = String::new();
     io::stdin().read_line(&mut line).unwrap();
-    let name = line.trim_end_matches(|c| c == '\r' || c == '\n');
+    let first = line.trim_end_matches(|c| c == '\r' || c == '\n');
+    let first: i64 = first.trim().parse().unwrap();
 
-    // TODO: print the two lines described in the exercise.
-    // Use a {} placeholder for name; do not type any name yourself.
-    let _ = name;
-    println!("Hello, {}!", name);
-    println!("Welcome to Rust.");
+    let mut line = String::new();
+    io::stdin().read_line(&mut line).unwrap();
+    let second = line.trim_end_matches(|c| c == '\r' || c == '\n');
+    let second: i64 = second.trim().parse().unwrap();
+
+    let mut result = first;
+    println!("{}", result);
+    result += second;
+    println!("{}", result);
 }
