@@ -3,24 +3,27 @@ use std::io;
 fn main() {
     let mut line = String::new();
     io::stdin().read_line(&mut line).unwrap();
-    let a = line.trim_end_matches(|c| c == '\r' || c == '\n').trim();
-    let a: i64 = a.trim().parse().unwrap();
+    let mut input = line.trim_end_matches(|c| c == '\r' || c == '\n').trim().to_string();
 
-
-    let mut line = String::new();
-    io::stdin().read_line(&mut line).unwrap();
-    let b = line.trim_end_matches(|c| c == '\r' || c == '\n').trim();
-    let b: i64 = b.trim().parse().unwrap();
-
-    println!("{}", square(a));
-    println!("{}", square(b));
-    println!("{}", sum_of_square(a, b));
+    println!("{}", vowel_count(&input));
+    make_loud(&mut input);
+    println!("{}", input);
+    println!("{}", vowel_count(&input));
+}
+fn vowel_count(s: &str) -> usize {
+    let vowels: String = String::from("aeiou"); 
+    let mut n = 0;
+    for c in s.to_lowercase().chars() {
+        for vowel in vowels.chars() {
+            if c == vowel { n += 1; }
+        }
+    }
+    n
 }
 
-fn square(n: i64) -> i64 {
-    n*n
-}
-
-fn sum_of_square(a: i64, b: i64) -> i64 {
-    square(a) + square(b)
+fn make_loud(s: &mut String) {
+    *s = s.to_uppercase();
+    if s.chars().last() != Some('!') {
+        s.push('!');
+    }
 }
